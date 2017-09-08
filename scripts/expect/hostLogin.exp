@@ -1,0 +1,12 @@
+#!/usr/bin/expect
+set host [lindex $argv 0]
+set hostname [lindex $argv 1]
+
+set f [open ./passwd.txt]
+set password [gets $f]
+
+spawn ssh username@$host
+expect "password"
+send "$password\r"
+expect "$"
+send "ssh username@$hostname -p 4444\r"
